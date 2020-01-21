@@ -1,0 +1,27 @@
+name: .NET Core
+
+on: 
+  push:
+    branches: 
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Run SSH command
+      uses: garygrossgarten/github-action-ssh@v0.3.0
+      with:
+        host: ${{ secrets.VmHost }}
+        username: ${{ secrets.VmUsername }}
+        privateKey: ${{ secrets.VmKey }}
+        port: 22
+        command: |
+          sudo ./CIRun.sh ${{ secrets.BotToken }}
+          exit
+          
+           
+           
+      
